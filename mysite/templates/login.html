@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>Login</head>
+    <body>
+        <form action='' method="POST">
+            {% csrf_token %}
+            Username:
+            <input type="text" name="username"/>
+            Password:
+            <input type="password" name="password"/>
+            <input type="submit"/>
+        </form>
+    </body>
+</html>

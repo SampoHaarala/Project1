@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Bank Transfer</title>
+    </head>
+
+    <body>
+		<h1>Accounts and balances</h1>
+
+        <table>
+            <tr>
+                Account name:<br/>
+                {{username}}<br/>
+                Balance:<br/>
+                {{balance}}<br/>
+            </tr>
+        </table>
+
+        <h2>Transfer money</h2> 
+        <form action='{{username}}/transfer/' method="POST">
+			{% csrf_token %}
+            <span>To:</span><br/>
+            <select name="to">
+			{% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+			{% endfor %}
+            </select><br/>
+
+            <span>Amount:</span><br/>
+            <input type="number" name="amount"/><br/>
+
+            <input type="submit" value="Send"/>
+        </form>
+    </body>
+
+
+    </body>
+</html>
