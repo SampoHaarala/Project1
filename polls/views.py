@@ -26,23 +26,23 @@ def login(request):
     return render(request, 'login.html')
 
 #FLAW4 FIX:
-test_transfer = []
+test_transfer = {}
 
-def set_test_transfer(to, amount):
+def set_test_transfer(user, to, amount):
     global test_transfer
-    test_transfer = [to, amount]
+    test_transfer[user] = [to, str(amount)]
 
-def test_test_transfer(to, amount):
-    if to == test_transfer[0] and amount == test_transfer[1]:
+def test_test_transfer(user, to, amount):
+    if to == test_transfer[user][0] and str(amount) == test_transfer[user][1]:
         return true
     else:
         return false
-
+    
 def test_transfer(request, user):
     if request.method == 'POST':
         to = request.POST.get('to')
         amount = request.POST.get('amount')
-        set_test_transfer(to, amount)
+        set_test_transfer(user, to, amount)
         return render(request, 'test_transfer.html', {'to': to, 'amount': amount}) 
     #Here 'test_transfer.html' should be a template that just shows that transfer request data wasn't tampered with.
     #After the request is confirmed the actual transfer request is sent.
