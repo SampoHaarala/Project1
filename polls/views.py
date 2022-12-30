@@ -42,13 +42,16 @@ def test_transfer(request, user):
         amount = request.POST.get('amount')
         set_test_transfer(to, amount)
         return render(request, 'test_transfer.html', {'to': to, 'amount': amount}) 
-#Here 'test_transfer.html' should be a template that just shows that transfer request wasn't tampered with. After the request is confirmed the actual transfer request is sent.
+    #Here 'test_transfer.html' should be a template that just shows that transfer request data wasn't tampered with.
+    #After the request is confirmed the actual transfer request is sent.
 
 #FLAW4: No protection against request tampering when transfering money.
 def transfer(request, user):
     if request.method == 'POST':
         to = request.POST.get('to')
         amount = request.POST.get('amount')
+        #FLAW4 FIX: Check that the test_transfer matches.
+        #if test_test_transfer(to, amount):
         if amount != None and to != None:
             amount = int(amount)
             con = sqlite3.connect('users.sqlite3')
@@ -58,9 +61,13 @@ def transfer(request, user):
             balanceT = cur.execute("SELECT balance FROM Users WHERE name='%s'" % (to)).fetchone()[0]
             print(balanceT)
 
-        #Transfering minus amounts causes the sender to receive
+            #FLAW3: Transfering minus amounts causes the sender to receive
+            #FLAW3 FIX: Set up a if-statement that checks that the amount is valid.
+            #if amount <= balanceS and 0 < amount:
             balanceS -= amount
             balanceT += amount
+            #else:
+            #   return redirect('/account/' + user) #Possibly implement an error message for the user.
 
             print(cur.execute("UPDATE Users SET balance='%s' WHERE name='%s'" % (balanceS, user)).fetchone())
             print(cur.execute("UPDATE Users SET balance='%s' WHERE name='%s'" % (balanceT, to)).fetchone())
