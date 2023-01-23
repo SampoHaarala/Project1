@@ -1,5 +1,5 @@
-Tämä projekti on palautukseni MOOC:in kurssisarjan Cyber Security Base 2022 kurssin Project 1 tehtävään.
-Projektin voi avata localhost:8000:teen. Käyttäjät ovat: 
+Tämä projekti on palautukseni MOOC:in kurssisarjan Cyber Security Base 2022 kurssin Project 1 tehtävään. Tarkoituksena oli tehdän ongelmallinen nettisivu ja sitten täytyi kuvata kuinka ongelmat korjattaisiin.
+Projektin voi avata localhost:8000:teen Command Prompista komennolla python3 manage.py . Käyttäjät ovat: 
 username: Admin, password: coffee
 username: bob, password: passwd
 username: alice, password: redqueen
