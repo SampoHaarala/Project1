@@ -14,7 +14,7 @@ def login(request):
         con = sqlite3.connect('users.sqlite3')
         cur = con.cursor()
         #FLAW1 FIX: Check for harming input like: "DROP TABLE Users"
-        response = cur.execute("SELECT name FROM Users WHERE password='%s'" % (passw)).fetchone() #FLAW 1: This line has an injection vulnerability. 
+        response = cur.execute("SELECT name FROM Users WHERE password='%s'" % (passw)).fetchone()[0] #FLAW 1: This line has an injection vulnerability. 
         #FLAW1 FIX: Above line needs to be changed to:
         #response = cur.execute("SELECT password FROM Users WHERE name=’%s’" % (usern)).fetchone()
         if response == None:
